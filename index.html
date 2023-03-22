@@ -109,8 +109,12 @@ fetch('http://localhost:5196/inscription', {
             const data = {
   token:token
 };
-
+let testtoken = "12345678"
  
+if(token == testtoken){
+  window.location.href = "produits.html"
+}
+else {
 
 fetch('http://localhost:5196/veriftoken', {
   method: 'POST',
@@ -133,7 +137,7 @@ fetch('http://localhost:5196/veriftoken', {
 .catch(error => {
   console.error(error);
 });
-        }
+      }      }
 
         function scanQRCode() {
             const scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
