@@ -26,7 +26,7 @@
         
             <main>
               <h2>Inscription</h2>
-              <form>
+              <form id = "formA">
                 <div>
                   <label for="email"><i class="fas fa-envelope"></i></label>
                   <input type="email" id="email" name="email" placeholder="Votre e-mail" required />
@@ -41,16 +41,13 @@
 
             <main>
               <h2>Connexion</h2>
-              <form>
+              <form id = "formB">
                 <div>
-                  <label for="email1"><i class="fas fa-envelope"></i></label>
-                  <input type="email" id="email1" name="email1" placeholder="Votre e-mail" required />
+                  <label for="token"><i class="fas fa-envelope"></i></label>
+                  <input type="text" id="token" name="token" placeholder="Votre token" required />
                 </div>
-                <div>
-                  <label for="password"><i class="fas fa-mug-hot"></i></label>
-                  <input type="password" id="password" name="password" placeholder="Votre mot de passe" required />
-                </div>
-                <button type="submit">Recevoir mon QR Code</button>
+              
+                <button type="submit">Connexion</button>
               </form>
             </main>
         
@@ -67,17 +64,75 @@
         
 
     <script>
+      const form = document.querySelector('#formA'); form.addEventListener('submit', 
+      function(event) { event.preventDefault();
+      createUser()})// empêcher l'envoi du formulaire par défaut
         function createUser() {
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const password = document.getElementById('password1').value;
 
-            axios.post('http://localhost:5196/inscription', { email: email, password: password })
-            .then(response => {
-              console.log('envoie réussi')
-            })
-            .catch(error => {
-                console.error('Erreur lors de la création de l\'utilisateur : ' + error);
-            });
+            const data = {
+  email: email,
+  password: password
+};
+
+ 
+
+fetch('http://localhost:5196/inscription', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Erreur lors de la requête');
+  }
+  return response.json();
+})
+.then(data => {
+  console.log(data); // affiche la réponse du serveur
+})
+.catch(error => {
+  console.error(error);
+});
+        }
+
+        const formtoken = document.querySelector('#formB'); formtoken.addEventListener('submit', 
+      function(event) { event.preventDefault();
+      veriftoken()})// verification du token
+        function veriftoken() {
+            const token = document.getElementById('token').value;
+            
+
+            const data = {
+  token:token
+};
+
+ 
+
+fetch('http://localhost:5196/veriftoken', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Erreur lors de la requête');
+  }
+  // Rediriger l'utilisateur vers la page app.html
+
+    window.location.href = 'produits.html';
+})
+.then(data => {
+  console.log(data); // affiche la réponse du serveur
+})
+.catch(error => {
+  console.error(error);
+});
         }
 
         function scanQRCode() {
