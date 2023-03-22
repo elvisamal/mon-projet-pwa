@@ -2,7 +2,7 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
       caches.open('v1').then(function(cache) {
         return cache.addAll([
-          '/',
+          './mon-projet-pwa/',
           './mon-projet-pwa/index.html',
           './mon-projet-pwa/style.css',
           'https://rawgit.com/schmich/instascan-builds/master/instascan.min.js',
