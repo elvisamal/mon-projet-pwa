@@ -1,0 +1,76 @@
+/* Style global pour la page */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
+/* Style pour le titre */
+h1 {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+/* Style pour le conteneur d'authentification */
+#auth-container {
+    margin-top: 50px;
+}
+
+/* Style pour le titre du formulaire d'inscription */
+#auth-container h2 {
+    font-size: 20px;
+}
+
+/* Style pour le bouton de numérisation de code QR */
+#scan-button {
+    background-color: #007aff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style pour le formulaire d'inscription */
+#signin-form {
+    display: inline-block;
+    text-align: left;
+}
+
+/* Style pour les étiquettes du formulaire d'inscription */
+#signin-form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style pour les champs de saisie du formulaire d'inscription */
+#signin-form input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Style pour le bouton d'inscription */
+#signin-form button[type=submit] {
+    background-color: #007aff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style pour les messages d'erreur de validation du formulaire */
+#error-message {
+    color: red;
+    margin-top: 10px;
+}

@@ -1,0 +1,21 @@
+{
+    "name": "PayeTonKawa",
+    "short_name": "PTK",
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "img1.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "img1_512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

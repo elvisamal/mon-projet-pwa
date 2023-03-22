@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+
+    <html lang="fr">
+          <head>
+            <link rel="manifest" href="manifest.json">
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <title>Inscription - vendeur</title>
+            <link rel="stylesheet" href="style.css" />
+          </head>
+        
+          <body>
+            <header>
+              <h1>PayeTonKawa</h1>
+              <nav>
+                <ul>
+                  <li><a href="#">Accueil</a></li>
+                  <li><a href="#">Menu</a></li>
+                  <li><a href="#">A propos</a></li>
+                </ul>
+              </nav>
+            </header>
+        
+            <main>
+              <h2>Inscription</h2>
+              <form>
+                <div>
+                  <label for="email"><i class="fas fa-envelope"></i></label>
+                  <input type="email" id="email" name="email" placeholder="Votre e-mail" required />
+                </div>
+                <div>
+                  <label for="password1"><i class="fas fa-mug-hot"></i></label>
+                  <input type="password" id="password1" name="password1" placeholder="Votre mot de passe" required />
+                </div>
+                <button type="submit">Recevoir mon QR Code</button>
+              </form>
+            </main>
+
+            <main>
+              <h2>Connexion</h2>
+              <form>
+                <div>
+                  <label for="email1"><i class="fas fa-envelope"></i></label>
+                  <input type="email" id="email1" name="email1" placeholder="Votre e-mail" required />
+                </div>
+                <div>
+                  <label for="password"><i class="fas fa-mug-hot"></i></label>
+                  <input type="password" id="password" name="password" placeholder="Votre mot de passe" required />
+                </div>
+                <button type="submit">Recevoir mon QR Code</button>
+              </form>
+            </main>
+        
+            <footer>
+              <p>Payetonkawa &copy; 2023</p>
+              <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+              </ul>
+            </footer>
+        
+            
+         
+        
+
+    <script>
+        function createUser() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            axios.post('http://localhost:5196/inscription', { email: email, password: password })
+            .then(response => {
+              console.log('envoie réussi')
+            })
+            .catch(error => {
+                console.error('Erreur lors de la création de l\'utilisateur : ' + error);
+            });
+        }
+
+        function scanQRCode() {
+            const scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+            scanner.addListener('scan', content => {
+                axios.get('http://localhost:5196/veriftoken' , { key: content })
+                .then(response => {
+                    console.log('Authentification réussie.');
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'authentification de l\'utilisateur : ' + error);
+                })
+            });
+
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('Aucune caméra trouvée sur l\'appareil.');
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
+    </script>
+    <button onclick="scanQRCode()">Scanner un QRCode</button>
+    <video id="preview"></video>
+    
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+      </script>
+      
+</body>
+</html>
