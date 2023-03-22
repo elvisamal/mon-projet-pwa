@@ -3,8 +3,8 @@ self.addEventListener('install', function(event) {
       caches.open('v1').then(function(cache) {
         return cache.addAll([
           '/',
-          '/index.html',
-          '/style.css',
+          './mon-projet-pwa/index.html',
+          './mon-projet-pwa/style.css',
           'https://rawgit.com/schmich/instascan-builds/master/instascan.min.js',
           'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'
         ]);
